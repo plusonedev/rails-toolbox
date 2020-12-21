@@ -8,8 +8,8 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       env:
-        GROUP_ID: $(id -g)
-        USER_ID: $(id -u)
+        GROUP_ID: 1000
+        USER_ID: 1000
       with:
         name: docker.pkg.github.com/plusonedev/rails-toolbox/6.1.0
         username: ${{ github.actor }}
