@@ -1,0 +1,19 @@
+name: Publish Docker to Github
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      env:
+        GROUP_ID: $(id -g)
+        USER_ID: $(id -u)
+      with:
+        name: docker.pkg.github.com/plusonedev/rails-toolbox/6.1.0
+        username: ${{ github.actor }}
+        password: ${{ secrets.DOCKER_GITHUB_PASSWORD }}
+        dockerfile: Dockerfile.rails
+        registry: docker.pkg.github.com
+        buildargs: GROUP_ID,USER_ID

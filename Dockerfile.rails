@@ -1,0 +1,19 @@
+# Dockerfile.rails
+FROM ruby:2.7
+
+ARG USER_ID
+ARG GROUP_ID
+
+#RUN addgroup --gid $GROUP_ID user
+RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
+
+ENV INSTALL_PATH /opt/project
+RUN mkdir -p $INSTALL_PATH
+
+#RUN gem install rails bundler
+RUN gem install rails -v 6.1.0 && gem install bundler -v 2.2.2
+RUN chown -R $USER_ID:$GROUP_ID /opt/project
+WORKDIR /opt/project
+
+USER $USER_ID
+CMD ["/bin/sh"]
